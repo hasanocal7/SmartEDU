@@ -1,12 +1,8 @@
-// Express Module
 const express = require('express')
+const courseController = require('../controller/courseController');
 
-// Controller Module
-const courseController = require('../controller/courseController')
+const router = express.Router();
 
-// Router
-const router = express.Router()
-
-router.route('/').post(courseController.createCourse); //http://localhost:3000/courses
+router.route('/').post(courseController.createCourse) // http://localhost:3000/courses
 
 module.exports = router;

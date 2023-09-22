@@ -5,11 +5,9 @@ const CourseSchema = new Schema({
   name: {
     type: String,
     unique: true,
-    required: true,
   },
   description: {
     type: String,
-    unique: false,
     required: true,
   },
   createdAt: {
@@ -19,5 +17,4 @@ const CourseSchema = new Schema({
 });
 
 const Course = mongoose.model('Course', CourseSchema);
-
 module.exports = Course;
