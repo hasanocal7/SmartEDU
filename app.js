@@ -5,6 +5,7 @@ const ejs = require('ejs')
 const mongoose = require('mongoose');
 const pageRoute = require('./routes/pageRoute')
 const courseRoute = require('./routes/courseRoute');
+const categoryRoute = require('./routes/categoryRoute');
 
 const bodyParser = require('body-parser')
 
@@ -34,6 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 // Routes
 app.use('/', pageRoute);
 app.use('/courses', courseRoute);
+app.use('/categories', categoryRoute);
 
 // Application Connect with Port
 const port = process.env.PORT;
