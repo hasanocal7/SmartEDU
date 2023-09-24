@@ -19,6 +19,7 @@ exports.createUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   try {
+    // USER SESSION
     const { email, password } = req.body;
 
     // Kullanıcıyı email adresine göre bulun
@@ -37,8 +38,8 @@ exports.loginUser = async (req, res) => {
 
     // JWT oluşturun ve kullanıcıya gönderin
     const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
-
-    res.status(200).json({ message: 'Başarıyla giriş yaptınız', token });
+    req.session.userID = user._id;
+    res.status(200).redirect('/');
   } catch (error) {
     res.status(500).json({ message: 'Sunucu hatası', error: error.message });
   }

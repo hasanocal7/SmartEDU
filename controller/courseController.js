@@ -3,11 +3,7 @@ const Category = require('../models/Category');
 
 exports.createCourse = async (req, res) => {
   try {
-    const course = await Course.create({
-      name: req.body.name,
-      description: req.body.description,
-      category: req.body.category,
-    });
+    const course = await Course.create(req.body);
     res.status(201).json({
       status: 'success',
       course,
