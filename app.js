@@ -4,6 +4,7 @@ require('dotenv').config();
 const ejs = require('ejs')
 const mongoose = require('mongoose');
 const session = require('express-session')
+const MongoStore = require('connect-mongo');
 const bodyParser = require('body-parser')
 
 const pageRoute = require('./routes/pageRoute')
@@ -39,6 +40,7 @@ app.use(
   secret: 'my_keyboard_cat',
   resave: false,
   saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl: 'mongodb://localhost/smartedu-db' }),
   })
   );
 

@@ -13,7 +13,7 @@ exports.createUser = async (req, res) => {
     res.status(400).json({
       status: 'fail',
       error,
-    })
+    });
   }
 };
 
@@ -22,25 +22,30 @@ exports.loginUser = async (req, res) => {
     // USER SESSION
     const { email, password } = req.body;
 
-    // Kullanıcıyı email adresine göre bulun
     const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(404).json({ message: 'Kullanıcı bulunamadı' });
     }
 
-    // Şifreleri karşılaştırın
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
       return res.status(401).json({ message: 'Şifre eşleşmiyor' });
     }
 
-    // JWT oluşturun ve kullanıcıya gönderin
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, 'your-secret-key', {
+      expiresIn: '1h',
+    });
     req.session.userID = user._id;
     res.status(200).redirect('/');
   } catch (error) {
     res.status(500).json({ message: 'Sunucu hatası', error: error.message });
   }
+};
+
+exports.logoutUser = (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/');
+  });
 };
