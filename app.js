@@ -28,10 +28,10 @@ mongoose
     console.log('DB Connected Successfully');
   });
 
-//Template Engine
+// Template Engine
 app.set('view engine', 'ejs');
 
-//Middleware
+// Middleware
 app.use(express.static("public"))
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -44,7 +44,7 @@ app.use(
   })
   );
 
-//
+// Global Variable
 global.userIN = null;
 
 // Routes
