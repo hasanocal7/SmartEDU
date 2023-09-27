@@ -22,18 +22,19 @@ exports.createCourse = async (req, res) => {
 
 exports.getAllCourses = async (req, res) => {
   try {
-
+    let filter = {}
+    
     const categorySlug = req.query.categories;
 
     const query = req.query.search;
 
-    let filter = {}
+    
 
     if(query) {
       filter = {name:query}
     }
 
-    if(!query && ! categorySlug) {
+    if(!query && !categorySlug) {
       filter.name = "",
       filter.category = null
     }

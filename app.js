@@ -23,7 +23,7 @@ const app = express();
 
 //Connect DB
 mongoose
-  .connect('mongodb://localhost/smartedu-db', {
+  .connect(`${process.env.DB_URL}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -43,7 +43,7 @@ app.use(
   secret: 'my_keyboard_cat',
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: 'mongodb://localhost/smartedu-db' }),
+  store: MongoStore.create({ mongoUrl: `${process.env.DB_URL}` }),
   })
   );
 app.use(flash());
@@ -71,7 +71,7 @@ app.use('/categories', categoryRoute);
 app.use('/users', userRoute);
 
 // Application Connect with Port
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`App Started on Port: ${port} ...`);
